@@ -10,16 +10,10 @@ public class MortgageCalculator {
 	List<String> Level3Profession = new ArrayList<>(Arrays.asList(new String[]{"Department head","Professor"}));
 	
 	public double computeMaxMortgage(int yearOfBirt, int month, int day, double monthlyIncome, boolean married, double monthlyIncomePartner, String profession) {
+		
 		double result=0;
-		//calculate age
-		LocalDate today = LocalDate.now();                          //Today's date
-		LocalDate birthday = LocalDate.of(yearOfBirt, month, day);  //Birth date
 		
-		
-		 
-		Period p = Period.between(birthday, today);
-		int age = p.getYears();
-		System.out.println(age);
+		int age = calculateAge(yearOfBirt, month, day);
 		
 		if (age < 18) {
 			result = 0;
@@ -28,15 +22,6 @@ public class MortgageCalculator {
 		
 		double totalIncome = married ? monthlyIncome + monthlyIncomePartner * 0.94 : monthlyIncome; 
 		
-		if (2000<=totalIncome && totalIncome<3000 && Level1Profession.contains(profession)) {
-			result = 160000;
-		}
-		if (2000<=totalIncome && totalIncome<3000 && Level2Profession.contains(profession)) {
-			result = 120000;
-		}
-		if (2000<=totalIncome && totalIncome<3000 && Level3Profession.contains(profession)) {
-			result = 220000;
-		}
 		
 		if (2000<=totalIncome && totalIncome<3000) {
 			if (Level1Profession.contains(profession)) result = 160000;
@@ -56,8 +41,16 @@ public class MortgageCalculator {
 		
 
 		
-		
 		return result;
+	}
+	public int calculateAge(int yearOfBirt, int month, int day) {
+		LocalDate today = LocalDate.now();                          //Today's date
+		LocalDate birthday = LocalDate.of(yearOfBirt, month, day);  //Birth date
+		
+		
+		 
+		Period p = Period.between(birthday, today);
+		return p.getYears();
 	}
 	
 
