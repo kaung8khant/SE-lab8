@@ -2,23 +2,23 @@ package shoppingcart;
 import products.Product;
 
 public class CartLine {
-	int q;
-	Product p;
+	int quantity;
+	Product product;
 
-	public Product getP() {
-		return p;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setP(Product p) {
-		this.p = p;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
-	public int getQ() {
-		return q;
+	public int getQuantity() {
+		return quantity;
 	}
 
-	public void setQ(int q) {
-		this.q = q;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 }
