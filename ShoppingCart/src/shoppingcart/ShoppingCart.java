@@ -9,8 +9,7 @@ import products.Product;
 public class ShoppingCart {
 	ArrayList<CartLine> list = new ArrayList<CartLine>();
 
-	public void action(Product product, String action) {
-		if (action.equals("add")){
+	public void add(Product product) {
 		for (CartLine cline : list) {
 			if (cline.getProduct().getProductnumber().equals(product.getProductnumber())) {
 				cline.setQuantity(cline.getQuantity()+1);
@@ -21,35 +20,33 @@ public class ShoppingCart {
 		cline.setProduct(product);
 		cline.setQuantity(1);
 		list.add(cline);
-		}
-		else{
-			if (action.equals("remove")){
-			Iterator<CartLine> iter = list.iterator();
-			while (iter.hasNext()){
-				CartLine cline = iter.next();
-				if (cline.getProduct().getProductnumber().equals(product.getProductnumber())){
-					if (cline.getQuantity()>1){
-						cline.setQuantity(cline.getQuantity()-1);
-					}
-					else{
-						iter.remove();
-					}
+	}
+	
+	public void remove(Product product) {
+		Iterator<CartLine> iter = list.iterator();
+		while (iter.hasNext()){
+			CartLine cline = iter.next();
+			if (cline.getProduct().getProductnumber().equals(product.getProductnumber())){
+				if (cline.getQuantity()>1){
+					cline.setQuantity(cline.getQuantity()-1);
 				}
-			}
-			}
-			else{ //action is print
-				System.out.println("Content of the shoppingcart:");
-				for (CartLine cline : list) {
-					System.out.println(cline.getQuantity() + " "
-							+ cline.getProduct().getProductnumber() + " "
-							+ cline.getProduct().getDescription() + " "
-							+ cline.getProduct().getPrice());
+				else{
+					iter.remove();
 				}
-				System.out.println("Total price ="+getT());
 			}
 		}
 	}
-
+	
+	public void print() {
+		System.out.println("Content of the shoppingcart:");
+		for (CartLine cline : list) {
+			System.out.println(cline.getQuantity() + " "
+					+ cline.getProduct().getProductnumber() + " "
+					+ cline.getProduct().getDescription() + " "
+					+ cline.getProduct().getPrice());
+		}
+		System.out.println("Total price ="+getT());
+	}
 	
 	// get total price
 	public double getT(){

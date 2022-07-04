@@ -45,10 +45,8 @@ public class MortgageCalculator {
 	}
 	public int calculateAge(int yearOfBirt, int month, int day) {
 		LocalDate today = LocalDate.now();                          //Today's date
-		LocalDate birthday = LocalDate.of(yearOfBirt, month, day);  //Birth date
-		
-		
-		 
+		LocalDate birthday = LocalDate.of(yearOfBirt, month, day);  //change integer data into date format
+
 		Period p = Period.between(birthday, today);
 		return p.getYears();
 	}
